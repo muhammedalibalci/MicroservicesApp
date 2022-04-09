@@ -1,0 +1,9 @@
+﻿global using CatalogService.Context;
+global using Microsoft.EntityFrameworkCore;
+global using CatalogService.Domain;
+global using MediatR;
+global using AutoMapper;
+global using CatalogService.CQRS.Commands.CreateCatalog;
+global using CatalogService.CQRS.Commands.UpdateCatalog;
+global using CatalogService.CQRS.Queires.GetAllCatalog;
+global using Microsoft.AspNetCore.Mvc;
