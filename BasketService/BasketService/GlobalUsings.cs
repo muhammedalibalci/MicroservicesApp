@@ -1,0 +1,11 @@
+﻿global using BasketService.Context;
+global using Microsoft.EntityFrameworkCore;
+global using MediatR;
+global using AutoMapper;
+global using Microsoft.AspNetCore.Mvc;
+global using BasketService.Domain;
+global using CatalogService.CQRS.Commands.AddItemToBasket;
+global using CatalogService.CQRS.Commands.DeleteBasket;
+global using CatalogService.CQRS.Commands.UpdateBasket;
+global using CatalogService.CQRS.Queires.GetBasketByCustomerId;
+global using CatalogService.Mapping;
