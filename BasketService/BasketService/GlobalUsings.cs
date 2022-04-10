@@ -8,4 +8,7 @@ global using CatalogService.CQRS.Commands.AddItemToBasket;
 global using CatalogService.CQRS.Commands.DeleteBasket;
 global using CatalogService.CQRS.Commands.UpdateBasket;
 global using CatalogService.CQRS.Queires.GetBasketByCustomerId;
-global using CatalogService.Mapping;
+global using BasketService.Mapping;
+global using MassTransit;
+global using Shared.Domain;
+global using Shared.OrderEvents;

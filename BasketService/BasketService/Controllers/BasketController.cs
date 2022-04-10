@@ -1,12 +1,14 @@
-﻿namespace CatalogService.Controllers;
+﻿using BasketService.CQRS.Commands.Checkout;
+
+namespace CatalogService.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CatalogController : ControllerBase
+public class BasketController : ControllerBase
 {
     private readonly IMediator _mediator;
 
-    public CatalogController(IMediator mediator)
+    public BasketController(IMediator mediator)
     {
         _mediator = mediator;
     }
@@ -20,6 +22,13 @@ public class CatalogController : ControllerBase
 
     [HttpPost("addItemToBasket")]
     public async Task<IActionResult> AddItemToBasket([FromBody] AddItemToBasketCommand query)
+    {
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
+
+    [HttpPost("checkout")]
+    public async Task<IActionResult> Checkout([FromBody] CheckoutCommand query)
     {
         var result = await _mediator.Send(query);
         return Ok(result);
