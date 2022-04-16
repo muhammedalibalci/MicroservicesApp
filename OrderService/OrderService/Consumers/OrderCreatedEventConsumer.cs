@@ -30,6 +30,8 @@
 
             await _context.AddAsync(order);
             await _context.SaveChangesAsync();
+            
+            await _publishEndpoint.Publish(new OrderCompletedEvent("1"));
         }
     }
 }
