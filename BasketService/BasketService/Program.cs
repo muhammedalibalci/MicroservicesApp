@@ -1,5 +1,5 @@
-
-using MassTransit;
+using BasketService.Consumers;
+using Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +19,15 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddMassTransit(x =>
 {
+    x.AddConsumer<OrderCompletedEventConsumer>();
+
     x.UsingRabbitMq((context, cfg) =>
     {
+        cfg.ReceiveEndpoint(RabbitMQSettings.OrderCompletedEventQueueName, e =>
+        {
+            e.ConfigureConsumer<OrderCompletedEventConsumer>(context);
+        });
+
         cfg.Host(builder.Configuration.GetConnectionString("RabbitMQ"), h =>
         {
             h.Username("guest");
