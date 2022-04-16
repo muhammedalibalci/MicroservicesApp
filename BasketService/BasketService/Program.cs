@@ -9,7 +9,10 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<BasketContext>(opt => opt.UseInMemoryDatabase("basket"));
+builder.Services.AddEntityFrameworkNpgsql()
+                 .AddDbContext<BasketContext>(options =>
+                        options.UseNpgsql(builder.Configuration.GetConnectionString("basketConn"))
+                 );
 
 builder.Services.AddMediatR(AppDomain.CurrentDomain.Load("BasketService"));
 
