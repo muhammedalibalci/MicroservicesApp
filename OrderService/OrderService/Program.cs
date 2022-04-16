@@ -1,4 +1,3 @@
-using MassTransit;
 using OrderService.Consumers;
 using OrderService.Mapping;
 using Shared;
@@ -11,7 +10,10 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<OrderContext>(opt => opt.UseInMemoryDatabase("order"));
+builder.Services.AddEntityFrameworkNpgsql()
+                 .AddDbContext<OrderContext>(options =>
+                        options.UseNpgsql(builder.Configuration.GetConnectionString("orderConn"))
+                 );
 
 builder.Services.AddMediatR(AppDomain.CurrentDomain.Load("OrderService"));
 
