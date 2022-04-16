@@ -9,11 +9,12 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<CatalogContext>(opt => opt.UseInMemoryDatabase("test"));
+builder.Services.AddEntityFrameworkNpgsql()
+                 .AddDbContext<CatalogContext>(options =>
+                        options.UseNpgsql(builder.Configuration.GetConnectionString("catalogConn"))
+                 );
 
 builder.Services.AddMediatR(AppDomain.CurrentDomain.Load("CatalogService"));
-
-builder.Services.AddAddCatalogSeedData();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
