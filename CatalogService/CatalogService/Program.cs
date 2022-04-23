@@ -1,5 +1,5 @@
 using CatalogService.Mapping;
-using CatalogService.SeedData;
+using Shared.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +8,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddConsulConfig(builder.Configuration);
 
 builder.Services.AddEntityFrameworkNpgsql()
                  .AddDbContext<CatalogContext>(options =>
@@ -31,5 +33,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseConsul(builder.Configuration);
 
 app.Run();

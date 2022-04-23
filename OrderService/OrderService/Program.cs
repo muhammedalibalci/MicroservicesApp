@@ -1,6 +1,7 @@
 using OrderService.Consumers;
 using OrderService.Mapping;
 using Shared;
+using Shared.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,8 @@ builder.Services.AddMediatR(AppDomain.CurrentDomain.Load("OrderService"));
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddConsulConfig(builder.Configuration);
 
 builder.Services.AddMassTransit(x =>
 {
@@ -55,5 +58,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseConsul(builder.Configuration);
 
 app.Run();
