@@ -10,6 +10,39 @@
       "LoadBalancerOptions": {
         "Type": "LeastConnection"
       }
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "https",
+
+      "UpstreamPathTemplate": "/catalog/{everything}",
+      "ServiceName": "CatalogService",
+
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "https",
+
+      "UpstreamPathTemplate": "/basket/{everything}",
+      "ServiceName": "BasketService",
+
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "https",
+
+      "UpstreamPathTemplate": "/order/{everything}",
+      "ServiceName": "OrderService",
+
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
     }
   ],
   "GlobalConfiguration": {
