@@ -1,4 +1,5 @@
 using IdentityServer.Configurations;
+using Shared.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +11,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddIdentityServer()
     .AddDeveloperSigningCredential()
+    //.AddCustomTokenRequestValidator<CustomTokenRequestValidator>()
     .AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
     .AddInMemoryApiScopes(IdentityServerConfig.GetApiScopes())
+    .AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
     .AddInMemoryClients(IdentityServerConfig.GetClients());
 
 builder.Services.AddConsulConfig(builder.Configuration);
@@ -25,8 +28,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
 
 app.MapControllers();
 

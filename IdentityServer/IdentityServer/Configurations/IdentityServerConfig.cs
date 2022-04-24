@@ -1,5 +1,6 @@
 ﻿
 using IdentityServer4.Models;
+using Shared.Configurations;
 
 namespace IdentityServer.Configurations;
 
@@ -9,7 +10,8 @@ public static class IdentityServerConfig
     {
         return new List<ApiScope>
         {
-            new("default-api","default api"),
+            new(Roles.ReadOrder,"Read order"),
+            new(Roles.WriteOrder,"Write order"),
         };
     }
 
@@ -24,6 +26,14 @@ public static class IdentityServerConfig
         };
     }
 
+    public static IEnumerable<ApiResource> GetApiResources()
+    {
+        return new List<ApiResource>
+        {
+            new ApiResource("OrderService"){ Scopes = { Roles.ReadOrder,Roles.WriteOrder } },
+        };
+    }
+
     public static IEnumerable<Client> GetClients()
     {
         return new List<Client>
@@ -32,7 +42,7 @@ public static class IdentityServerConfig
             {
                 ClientId = "client",
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
-                AllowedScopes = {"default-api"},
+                AllowedScopes = {Roles.ReadOrder,Roles.WriteOrder},
                 ClientSecrets =
                 {
                     new Secret("secret".Sha256())
