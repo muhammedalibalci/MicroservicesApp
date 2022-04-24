@@ -24,6 +24,8 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddConsulConfig(builder.Configuration);
 
+builder.Services.AddCustomizedAuth(builder.Configuration);
+
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<OrderCreatedEventConsumer>();
@@ -55,7 +57,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseCustomizedAuth();
 
 app.MapControllers();
 
